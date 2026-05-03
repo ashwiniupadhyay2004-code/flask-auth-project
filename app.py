@@ -3,6 +3,16 @@ import sqlite3
 
 app = Flask(__name__)
 app.secret_key = "secret123"
+import sqlite3
+
+def init_db():
+    conn = sqlite3.connect('users.db')
+    c = conn.cursor()
+    c.execute("CREATE TABLE IF NOT EXISTS users (username TEXT, password TEXT)")
+    conn.commit()
+    conn.close()
+
+init_db()
 
 # Home → go to signup
 @app.route('/')
